@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+</head>
+<body>
+	       
+    <div ng-app="myApp" >
+        <a ui-sref="parent">点我显示父view内容</a>
+        <a ui-sref="parent.child">点我显示父view与子view内容</a>
+        <a ui-sref="parent2">33333</a>
+        <div ui-view></div> <!-- 父View -->      
+    </div>    
+  
+
+
+  <script type="text/javascript">
+    //定义模板，并注入ui-router
+    var app = angular.module('myApp', ['ui.router']);   
+    //对服务进行参数初始化，这里配stateProvider服务的视图控制
+    app.config(["$stateProvider",  function ($stateProvider) {      
+        $stateProvider     
+        .state("parent", {//父路由
+            url: '/parent',  
+            template:'<div>parent'
+                    +'<div ui-view><div>'// 子View
+                    +'</div>'
+        })      
+        .state("parent.child", {//子路由
+            url: '^/child',    
+            template:'<div>child</div>'
+        })   
+        .state("parent2", {//子路由
+            url: '/parent2',    
+            template:'<div>0.00.0</div>'
+        })  
+    }]);  
+  </script>
+
+</body>
+</html>

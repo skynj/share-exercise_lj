@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+</head>
+<body>
+	       
+    <div ng-app="myApp" >
+        <a ui-sref="index">show index</a>    
+        <div ui-view></div>  
+    </div>    
+  
+
+
+  <script type="text/javascript">
+    //定义模板，并注入ui-router
+    var app = angular.module('myApp', ['ui.router']);   
+    //对服务进行参数初始化，这里配stateProvider服务的视图控制
+    app.config(["$stateProvider",  function ($stateProvider) {      
+        $stateProvider     
+        .state("home", {
+            url: '/',  
+            template:"<div>homePage</div>"
+
+        })
+        .state("index", {
+            url: '/index/{id}',  
+            template:"<div>indexcontent</div>",
+            resolve: {
+                //这个函数的值会被直接返回，因为它不是数据保证
+                user: function() {
+                  return {
+                    name: "peter",
+                    email: "audiogroup@qq.com"
+                  }
+                },
+                //这个函数为数据保证, 因此它将在控制器被实例化之前载入。
+                detail: function($http) {
+                  return $http({
+                    method: 'JSONP',
+                    url: '/current_details'
+                  });
+                },
+                //前一个数据保证也可作为依赖注入到其他数据保证中！（这个非常实用）
+                myId: function($http, detail) {
+                  $http({
+                    method: 'GET',
+                    url: 'http://facebook.com/api/current_user',
+                    params: {
+                      email: currentDetails.data.emails[0]
+                    }
+                  })
+                }
+
+            },
+            controller:function(user,detail,myId$scope){
+                alert(user.name)
+                alert(user.email)
+                console.log(detail)
+            }
+        })                               
+    }]);  
+  </script>
+
+</body>
+</html>

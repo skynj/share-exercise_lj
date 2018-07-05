@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+</head>
+<body>
+	       
+    <div ng-app="myApp" >
+        <a ui-sref="index({id:30})">show index</a>    
+        <a ui-sref="test({username:'peter'})">show test</a>
+        <div ui-view></div>     
+    </div>    
+  
+
+
+  <script type="text/javascript">
+    //定义模板，并注入ui-router
+    var app = angular.module('myApp', ['ui.router']);   
+    //对服务进行参数初始化，这里配stateProvider服务的视图控制
+    app.config(["$stateProvider",  function ($stateProvider) {      
+        $stateProvider     
+        .state("home", {
+            url: '/',  
+            template:"<div>homePage</div>"
+
+        })
+        .state("index", {
+            url: '/index/:id',  
+            template:"<div>indexcontent</div>",
+            controller:function($stateParams){
+                console.log($stateParams.id)
+            }
+        })  
+        .state("test", {
+            url: '/test/:username',  
+            template:"<div>testContent</div>",
+            controller:function($stateParams){
+                console.log($stateParams.username)
+            }
+        })                
+    }]);  
+  </script>
+
+</body>
+</html>

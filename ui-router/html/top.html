@@ -1,0 +1,7 @@
+<div class="top">
+    <ul ng-class="curClass">
+        <li ng-repeat="item in topdata" ng-class="{active:item.selected}">
+            <a href="{{item.url}}">{{item.txt}}</a>
+        </li>
+    </ul>
+</div>
