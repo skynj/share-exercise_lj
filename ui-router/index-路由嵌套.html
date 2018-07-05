@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;padding: 0;
+    }
+    .ul{
+        height: 50px;
+        list-style: none;
+    }
+    .li{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        color: #fff;
+        float: left;
+        background: #00a2ff;
+        cursor: pointer;
+        margin-right: 1px;
+    }
+    .li a{
+        width: 100%;height: 100%;display: block;
+    }
+    .h4{
+        color: #f00;
+    }
+    </style>
+</head>
+<body ng-app="app">
+<ul class="ul">
+    <li class="li"><a ui-sref="aaa">aaa</a></li>
+    <li class="li"><a ui-sref="bbb">bbb</a></li>
+    <li class="li"><a ui-sref="ccc">ccc</a></li>
+    <li class="li"><a ui-sref="ddd">ddd</a></li>
+</ul>
+<div ui-view></div>
+</body>
+<script src="./js/angular.min.js"></script>
+<script src="./js/angular-ui-router.min.js"></script>
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/app2.js"></script>
+<script></script>
+</html>
