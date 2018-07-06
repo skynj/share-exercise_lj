@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bar</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    .div{background-color: #072349;}
+    </style>
+</head>
+<body>
+<div class="div" id="main" style="width: 900px;height: 300px;"></div>
+</body>
+</html>
+<script src="js/echarts.js"></script>
+<script>
+var dataAxis = ['aa', 'bb', 'cc', 'dd', 'ee', 'ff', 'gg', 'hh'];
+var data = [0.86, 0.90, 1.11, 1.22, 1.22, 1.02, 1.22, 1.02];
+
+// 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById('main'));
+
+// 指定图表的配置项和数据
+var option = {
+    title: {
+        text: '单位：万吨',
+        textStyle: {
+            fontSize: 12,
+            color: '#fff',
+            fontWeight: 'normal'
+        },
+        left: 15,
+        top: 18
+    },
+    grid: {
+        left: 60,
+        top: 60,
+        right: 20,
+        bottom: 40
+    },
+    xAxis: {
+        data: dataAxis,
+        axisLabel: {
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        //坐标轴刻度
+        axisTick: {
+            show: false
+        },
+        axisLine: {
+            show: true,
+            lineStyle: {
+                color: '#1d4078'
+            }
+        },
+        splitArea: {
+            show: true,
+            areaStyle: {
+                color:['#04183c','#072349']
+            }
+        }
+    },
+    yAxis: {
+        axisLine: {
+            lineStyle: {
+                color: '#1d4078'
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#1d4078',
+                type: 'dashed'
+            }
+        },
+        z:1
+    },
+    // 缩放
+    // dataZoom: [
+    //     {
+    //         type: 'inside'
+    //     }
+    // ],
+    series: [
+        {
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#4695ff'},
+                            {offset: 0.5, color: '#23ecff'},
+                            {offset: 1, color: '#00ffff'}
+                        ]
+                    )
+                },
+                emphasis: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#00ffff'},
+                            {offset: 0.5, color: '#23ecff'},
+                            {offset: 1, color: '#4695ff'}
+                        ]
+                    )
+                }
+            },
+            barWidth: 20,
+            markLine : {
+                symbol:false,
+                data : [
+                    {
+                        type : 'average', 
+                        name: '平均值',
+                        lineStyle:{
+                            color:'#3FFFBD'
+                        },
+                        label:{
+                            show:false
+                        }
+                    },
+                    {
+                        type : 'min', 
+                        name: '最小值',
+                        lineStyle:{
+                            color:'#FF6568'
+                        },
+                        label:{
+                            show:false
+                        }
+                    }
+                ]
+            },
+            data: data,
+            label: {
+                show: true,
+                position: 'top',
+                color: '#fff'
+            }
+        }
+    ]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+</script>
