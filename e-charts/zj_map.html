@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    .echarts-wrapper{width: 800px;height: 600px;margin: 20px;}
+    </style>
+</head>
+<body>
+<div class="echarts-wrapper" id="main"></div>
+</body>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script>
+$.get('./json/321100.json',function(zj_json){
+    echarts.registerMap('镇江',zj_json);
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '镇江map'
+        },
+        series:[
+            {
+                name:'',
+                type:'map',
+                map:'镇江',
+                mapLocation:{
+                    y:60
+                },
+                itemSytle:{
+                    emphasis:{label:{show:false}}
+                },
+                data:[
+                    {name:'句容市',value:85},
+                    {name:'丹徒区',value:82},
+                    {name:'润州区',value:80},
+                    {name:'京口区',value:86},
+                    {name:'新区',value:89},
+                    {name:'丹阳市',value:88},
+                    {name:'扬中区',value:91}
+                ]
+            }
+        ],
+
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+})
+
+
+</script>
+</html>
