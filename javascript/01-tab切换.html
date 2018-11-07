@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    .container{width: 600px;height: 400px;background: #eee;margin: 100px;}
+    .ul{height: 100px;list-style: none;}
+    .ul li{width: 200px;height: 100px;float: left;text-align: center;line-height: 100px;background: #ccc;cursor: pointer;}
+    li.active{background: #fff600;}
+    .liDiv{height: 300px;}
+    .hide{display: none;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul class="ul">
+        <li class="active">11</li>
+        <li>22</li>
+        <li>33</li>
+    </ul>
+    <div class="liDiv">1111111111</div>
+    <div class="liDiv hide">2222222222</div>
+    <div class="liDiv hide">3333333333</div>
+</div>
+</body>
+<script>
+var lis = document.querySelector('.ul').children;
+var liDivs = document.querySelectorAll('.liDiv');
+// for(var i = 0; i < lis.length; i++){
+//     lis[i].index = i;           //记录索引
+//     lis[i].onclick = function(){
+//         for(var j = 0; j < lis.length; j++){
+//             lis[j].className = '';
+//             liDivs[j].className = 'hide';
+//         }
+//         this.className = 'active';
+//         liDivs[this.index].className = '';
+//     }
+// }
+for(let i = 0; i < lis.length; i++){
+    lis[i].onclick = function(){
+        for(let i = 0; i < lis.length; i++){
+            lis[i].className = '';
+            liDivs[i].className = 'hide';
+        }
+        this.className = 'active';
+        liDivs[i].className = '';
+    }
+}
+</script>
+</html>
